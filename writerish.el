@@ -63,6 +63,7 @@
    `(font-lock-warning-face ((,class (:inherit warning))))
    `(fringe ((,class (:weight ,base-weight))))
    `(shadow ((,class (:foreground ,dim))))
+   `(tab-bar ((,class (:foreground ,fg :background ,bg))))
    `(warning ((,class (:foreground ,orange))))
 
 ;;;;; Core UI
@@ -115,6 +116,7 @@
 
    `(minibuffer-prompt ((,class (:foreground ,fg-alt :inherit bold))))
    `(mode-line ((,class (:foreground ,fg :background ,bg-alt :box (:line-width 1 :color,bg-alt)))))
+   `(mode-line-active ((,class (:foreground ,fg :background ,bg-alt :box (:line-width 1 :color,bg-alt)))))
    `(mode-line-buffer-id ((,class (:foreground ,fg-alt :distant-foreground ,bg-alt))))
    `(mode-line-highlight ((,class (:inherit highlight :background unspecified))))
    `(mode-line-emphasis ((,class (:inherit highlight :background unspecified))))
@@ -415,6 +417,7 @@
    `(mu4e-header-face ((,class (:inherit default))))
    `(mu4e-forwarded-face ((,class (:inherit mu4e-header-face))))
    `(mu4e-region-code ((,class (:box (:color ,accent)))))
+   `(mu4e-related-face ((,class :foreground ,fg-dim :inherit mu4e-header-face)))
    `(mu4e-replied-face ((,class :foreground ,fg-dim :inherit mu4e-header-face)))
    `(mu4e-unread-face ((,class :foreground ,fg :weight bold :inherit mu4e-header-face)))
    `(mu4e-url-number-face ((,class (:foreground ,accent))))
@@ -435,6 +438,7 @@
    `(org-column-title ((,class (:foreground ,fg :inherit bold))))
    `(org-date ((,class (:foreground ,fg))))
    `(org-date-selected ((,class (:foreground ,accent :inherit bold))))
+   `(org-dispatcher-highlight ((,class (:inherit org-code))))
    `(org-document-info ((,class (:foreground ,dim))))
    `(org-document-title ((,class (:foreground ,dim :inherit bold))))
    `(org-done ((,class (:inherit org-level-1 :foreground ,dim))))

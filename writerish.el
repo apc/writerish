@@ -18,6 +18,14 @@
   :group 'writerish
   :type 'symbol)
 
+(defcustom writerish-inline-code-family nil
+  "Font family for inline code in rendered Markdown, or nil to use the default.
+With a monospaced body font, a narrower cut of the same family (for
+example \"Input Mono Condensed\" under Input Mono Narrow) sets code
+apart without a background.  Reload the theme after changing it."
+  :group 'writerish
+  :type '(choice (const :tag "Default font" nil) string))
+
 
 (defun writerish-themes--theme (palette name)
   "Define a variant named NAME using PALETTE."
@@ -67,6 +75,8 @@
    `(warning ((,class (:foreground ,orange))))
 
 ;;;;; Core UI
+   `(comint-highlight-input ((,class (:foreground ,fg-alt))))
+   `(comint-highlight-prompt ((,class (:foreground ,accent :inherit bold))))
    `(cursor ((,class (:background ,accent :inverse-video t))))
    `(custom-button ((,class (:background ,accent :foreground ,bg))))
    `(custom-group-tag ((,class (:foreground ,accent :inherit bold))))
@@ -143,6 +153,57 @@
 ;;;; Packages
 ;;;;; Ace jump
    `(ace-jump-face-foreground ((,class (:foreground ,accent :inherit bold))))
+
+;;;;; Agent-shell
+   ;; Header and mode-line: quiet, like iA's toolbar; only the model stands out.
+   `(agent-shell-model ((,class (:foreground ,fg-alt))))
+   `(agent-shell-thought-level ((,class (:foreground ,fg-dim))))
+   `(agent-shell-container-indicator ((,class (:foreground ,fg-dim))))
+   `(agent-shell-buffer-name ((,class (:inherit bold))))
+   `(agent-shell-key-binding ((,class (:inherit help-key-binding))))
+   ;; Sessions
+   `(agent-shell-session-id ((,class (:foreground ,dim))))
+   `(agent-shell-session-mode ((,class (:foreground ,fg-dim))))
+   `(agent-shell-session-title ((,class (:foreground ,fg))))
+   `(agent-shell-session-directory ((,class (:foreground ,fg-dim))))
+   `(agent-shell-session-date ((,class (:foreground ,dim))))
+   ;; Sections: headings bold like org-level-1; supporting text in fg-dim
+   ;; rather than `dim', which is too faint to read as body text.
+   `(agent-shell-section-heading ((,class (:inherit bold))))
+   `(agent-shell-section-annotation ((,class (:foreground ,fg-dim))))
+   `(agent-shell-thought-body ((,class (:foreground ,fg-dim))))
+   `(agent-shell-secondary ((,class (:foreground ,fg-dim))))
+   `(agent-shell-pending ((,class (:foreground ,dim))))
+   ;; Colour only when something needs attention: success stays quiet
+   ;; (completed tool calls, low context usage); warning/error keep orange/red.
+   `(agent-shell-success ((,class (:foreground ,fg-dim))))
+   ;; Listings
+   `(agent-shell-list-name ((,class (:inherit bold))))
+   `(agent-shell-list-value ((,class (:foreground ,fg-dim))))
+   ;; Prompt and input: blue prompt as for eshell; your own text one step
+   ;; heavier than the light body weight, so turns read apart without colour.
+   `(agent-shell-prompt ((,class (:foreground ,accent :inherit bold))))
+   `(agent-shell-input ((,class (:foreground ,fg-alt))))
+   `(agent-shell-permission-title ((,class (:inherit bold))))
+   ;; Viewport
+   `(agent-shell-viewport-prompt ((,class (:foreground ,fg-dim))))
+   `(agent-shell-viewport-status-view ((,class (:foreground ,dim))))
+   ;; Diff
+   `(agent-shell-diff-changes-label ((,class (:foreground ,dim :box (:line-width (1 . -1) :color ,dim)))))
+   ;; Chat mode: iA has no badges; drop the inverse-video boxes.
+   `(agent-shell-chat-me-label ((,class (:foreground ,accent :inherit bold :inverse-video nil :box nil))))
+   `(agent-shell-chat-agent-label ((,class (:inherit bold :inverse-video nil :box nil))))
+   ;; Markdown: markup recedes (iA greys its syntax), text stays plain.
+   `(agent-shell-markdown-inline-code ((,class (:foreground ,fg-dim :weight ,base-weight :inherit unspecified
+                                                :family ,(or writerish-inline-code-family 'unspecified)))))
+   `(agent-shell-markdown-blockquote ((,class (:foreground ,fg-dim))))
+   `(agent-shell-markdown-list-marker ((,class (:foreground ,fg-dim))))
+   `(agent-shell-markdown-list-done ((,class (:foreground ,dim :strike-through nil))))
+   `(agent-shell-markdown-table-header ((,class (:inherit (bold agent-shell-markdown-table)))))
+   `(agent-shell-markdown-table-border ((,class (:foreground ,dim :inherit agent-shell-markdown-table))))
+   `(agent-shell-markdown-table-zebra ((,class (:background ,bg-hl :inherit agent-shell-markdown-table))))
+   `(agent-shell-markdown-source-block ((,class (:background ,bg-hl :extend t))))
+   `(agent-shell-markdown-source-block-language ((,class (:foreground ,dim :inherit agent-shell-markdown-source-block))))
 
 ;;;;; Anzu
    `(anzu-match-1 ((,class (:foreground ,accent :inherit bold :box (:color ,accent)))))

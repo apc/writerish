@@ -568,6 +568,9 @@ apart without a background.  Reload the theme after changing it."
 
 Argument STYLE can be either \='light or \='dark."
   ;; (interactive)
+  ;; Turn off the other variant, so the two don't pile up in
+  ;; `custom-enabled-themes' with each toggle.
+  (writerish-themes-disable)
   (cond ((equal style 'light)
          (load-theme 'writerish t))
         ((equal style 'dark)

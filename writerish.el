@@ -405,7 +405,8 @@ apart without a background.  Reload the theme after changing it."
    `(markdown-header-face-2 ((,class (:inherit markdown-header-face :height 1.0))))
    `(markdown-header-face-3 ((,class (:inherit markdown-header-face :height 1.0))))
    `(markdown-header-face-4 ((,class (:inherit markdown-header-face :height 1.0))))
-   `(markdown-inline-code-face ((,class (:inherit markdown-code-face))))
+   `(markdown-inline-code-face ((,class (:foreground ,fg-dim :weight ,base-weight
+                                         :family ,(or writerish-inline-code-family 'unspecified)))))
    `(markdown-italic-face ((,class (:inherit italic))))
 
 ;;;;; Magit
@@ -494,12 +495,16 @@ apart without a background.  Reload the theme after changing it."
    `(org-agenda-structure ((,class (:inherit bold :height 1.0))))
    `(org-block ((,class (:inherit fg))))
    `(org-clock-overlay ((,class (:inherit secondary-selection))))
-   `(org-code ((, class (:inherit bold :box (:line-width (1 . -1) :color ,dim) :background ,bg-alt))))
+   ;; Same as agent-shell inline code: fg-dim, no box or background; the
+   ;; = and ~ markers set it apart.  A condensed family drifts org-table
+   ;; columns holding verbatim, since org aligns by character count.
+   `(org-code ((,class (:foreground ,fg-dim :weight ,base-weight
+                        :family ,(or writerish-inline-code-family 'unspecified)))))
    `(org-column ((,class (:foreground ,dim :slant normal))))
    `(org-column-title ((,class (:inherit bold))))
    `(org-date ((,class (:foreground ,fg))))
    `(org-date-selected ((,class (:foreground ,accent :inherit bold))))
-   `(org-dispatcher-highlight ((,class (:inherit org-code))))
+   `(org-dispatcher-highlight ((,class (:inherit help-key-binding))))
    `(org-document-info ((,class (:foreground ,dim))))
    `(org-document-title ((,class (:foreground ,dim :inherit bold))))
    `(org-done ((,class (:inherit org-level-1 :foreground ,dim))))
